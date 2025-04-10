@@ -1,0 +1,49 @@
+spring:
+  application:
+    name: geoloc
+  data:
+    redis:
+      host: redis
+      port: 6379
+      jackson:
+        serialization:
+          WRITE_DATES_AS_TIMESTAMPS: false
+          date-format: yyyy-MM-dd'T'HH:mm:ss.SSS
+          default-property-inclusion: non_null
+          deserialization:
+          fail-on-unknown-properties: false
+    mapper:
+      propagate-transient-marker: true
+    property-naming-strategy: SNAKE_CASE
+    visibility:
+      field: any
+      getter: none
+      setter: none
+      is-getter: none
+      serialization:
+        write-dates-as-timestamps: false
+  web:
+    resources:
+      static-locations: classpath:/static/
+  cache:
+    type: redis
+    redis:
+      time-to-live: 86400000
+      cache-null-values: false
+server:
+  port: 8080
+
+ipstack:
+  api:
+    key: e00399c49ebe6a91816815ab6d701532
+    url: http://api.ipstack.com/
+
+logging:
+  level:
+    com.devrodts.geoloc: DEBUG
+    org.springframework.data.redis: INFO
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html

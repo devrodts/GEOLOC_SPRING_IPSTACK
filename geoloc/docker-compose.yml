@@ -1,0 +1,29 @@
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATA_REDIS_HOST=redis
+      - SPRING_DATA_REDIS_PORT=6379
+      - IPSTACK_API_KEY=${IPSTACK_API_KEY}
+    depends_on:
+      - redis
+    networks:
+      - geoloc-network
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - geoloc-network
+
+volumes:
+  redis-data:
+
+networks:
+  geoloc-network:
+    driver: bridge 
